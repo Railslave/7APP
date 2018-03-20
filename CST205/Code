@@ -1,0 +1,667 @@
+#Warm-Up A:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def halfRed():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    setRed(p, r*0.5)
+  repaint(pic)
+
+#Warm Up B:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def noBlue():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getBlue(p)
+    setBlue(p, 0)
+  repaint(pic)
+
+#Problem 1: - Prompts for input
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def lessRed():                                 # lessRed(num) for arguement
+  pic = get_pic()
+  pixels = getPixels(pic)
+  num = input("Enter reduction percentage: ")  # Remove line for def with arguement
+  if num < 0 or num > 100:
+    print "Invalid Input"
+    lessRed()                                  # Remove line for def with arguement
+  else:
+    for p in pixels:
+      r = getRed(p)
+      x = r * (1.0 - (num * 0.01))
+      setRed(p, x)
+  repaint(pic)
+
+#Problem 2: - Prompts for input
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def moreRed():                                 # moreRed(num) for arguement
+  pic = get_pic()
+  pixels = getPixels(pic)
+  num = input("Enter increase percentage: ")   # Remove line for def with arguement
+  if num <= 0 or num > 100:
+    print "Invalid Input"
+    moreRed()                                  # Remove line for def with arguement
+  else:
+    for p in pixels:
+      r = getRed(p)
+      x = r / (1.0 - (num * 0.01))
+      setRed(p, x)
+    repaint(pic)
+
+#Problem 3:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def blendWhite(pixel, amount):
+  newRed = 255*amount + getRed(pixel)*(1-amount)
+  newGreen = 255*amount + getGreen(pixel)*(1-amount)
+  newBlue = 255*amount + getBlue(pixel)*(1-amount)
+  setColor(pixel, makeColor(newRed, newGreen, newBlue))
+  
+def roseColoredGlasses():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    setRed(p, 150)
+    g = getGreen(p)
+    setGreen(p, g * 0.5)
+    b = getBlue(p)
+    setBlue(p, b * 0.5)
+    blendWhite(p, 0.25)
+  repaint(pic)
+
+#Problem 4:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def lightenPixel(pixel):
+  color=getColor(pixel)
+  color=makeLighter(color)
+  setColor(pixel, color)
+  
+def lightenUp():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    setRed(p, r)
+    g = getGreen(p)
+    setGreen(p, g)
+    b = getBlue(p)
+    setBlue(p, b)
+    lightenPixel(p)
+  repaint(pic)
+
+#Problem 5:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def makeNegative():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    oppColor = makeColor(255 - r, 255 - g, 255 - b)
+    setColor(p, oppColor)
+  repaint(picture)
+
+#Problem 6A:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def bAndW():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    newColor = makeColor((r + g + b) / 3)
+    setColor(p, newColor)
+  repaint(pic)
+
+#Problem 6B:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def betterBAndW():
+  pic = get_pic()
+  pixels = getPixels(pic)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    newColor = makeColor((r * 0.299) + (g * 0.587) + (b * 0.114) / 3)
+    setColor(p, newColor)
+  repaint(pic)
+  
+#Problem 1A: Vertical Mirror
+
+def get_pic():
+  return makePicture(pickAFile())
+
+def vertMirror():
+  pic = get_pic()
+  w = getWidth(pic)
+  h = getHeight(pic)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w/2):
+    for y in range(0, h):
+      c = getColor(getPixel(pic, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, w-x-1, y), c)
+  show(pic)
+  show(canvas)
+  writePictureTo(canvas, "F://CSUMB//CST205//JES//LAB4//Results//vertmirror.jpg")
+  return canvas
+
+#Problem 1B: Horizontal Mirror
+
+def get_pic():
+  return makePicture(pickAFile())
+
+def horizMirror():
+  pic = get_pic()
+  w = getWidth(pic)
+  h = getHeight(pic)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w):
+    for y in range(0, h/2):
+      c = getColor(getPixel(pic, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, x, h-y-1), c)
+  show(pic)
+  show(canvas)
+  writePictureTo(canvas, "F://CSUMB//CST205//JES//LAB4//Results//horizmirror.jpg")
+  return canvas
+
+#Problem 1C: 
+
+def get_pic():
+  return makePicture(pickAFile())
+
+def horizMirrorBottom():
+  pic = get_pic()
+  w = getWidth(pic)
+  h = getHeight(pic)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w):
+    for y in range(h/2, h):
+      c = getColor(getPixel(pic, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, x, h-y-1), c)
+  show(pic)
+  show(canvas)
+  writePictureTo(canvas, "F://CSUMB//CST205//JES//LAB4//Results//horizmirrorbottom.jpg")
+  return canvas
+
+#Problem 1D:
+
+def get_pic():
+  return makePicture(pickAFile())
+
+def horizMirrorBottom():
+  pic = get_pic()
+  w = getWidth(pic)
+  h = getHeight(pic)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w):
+    for y in range(0, h/2):
+      c = getColor(getPixel(pic, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, x, h-y-1), c)
+  show(pic)
+  show(canvas)
+  writePictureTo(canvas, "F://CSUMB//CST205//JES//LAB4//Results//verthorizmirror.jpg")
+  return canvas
+
+#Problem 2:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def simpleCopy():
+  pic = get_pic()
+  w = getWidth(pic)
+  h = getHeight(pic)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w):
+    for y in range(0, h):
+      c = getColor(getPixel(pic, x, y))
+      setColor(getPixel(canvas, x, y), c)
+  show(canvas)
+  writePictureTo(pic, "F://CSUMB//CST205//JES//LAB4//Results//picture_copy.jpg")
+  return canvas
+
+#Problem 3:
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def rotatePic():                            
+  pic = get_pic()
+  w, h = getWidth(pic), getHeight(pic)      #get w and h
+  canvas = makeEmptyPicture(h, w)           #make empty canvas and flip it on its side              
+  for x in range(0, w):                     #loop for x
+    for y in range(0, h):                   #loop for y
+      color = getColor(getPixel(pic, x, y)) #same
+      target = getPixel(canvas, y, x)       #assign variable to new fct order of getPixel
+      setColor(target, color)               #set color to new mapping
+  show(canvas)
+  writePictureTo(canvas, "F://CSUMB//CST205//JES//LAB4//Results//rotate_picture.jpg")
+  return canvas
+
+#Problem 4:
+
+def get_pic():
+  return makePicture(pickAFile())
+
+def shrinkPicture():
+  src = get_pic()
+  srcW, srcH = getWidth(src), getHeight(src)
+  destW, destH = getWidth(src) / 2, getHeight(src) / 2
+  destPic = makeEmptyPicture(destW, destH)
+  destX = 0
+  for srcX in range(1, srcW, 2):
+    destY = 0
+    for srcY in range(1, srcH, 2):
+      color = getColor(getPixel(src, srcX, srcY))
+      setColor(getPixel(destPic, destX, destY), color)  
+      destY = destY + 1
+    destX = destX + 1
+  show(src)
+  #show(destPic)
+  repaint(destPic)
+  #show(destPic)
+  writePictureTo(destPic, "F://CSUMB//CST205//JES//LAB4//Results//smaller_picture.jpg")
+  
+#Warmup: Framed Image
+
+def get_pic():
+  return makePicture(pickAFile())
+  
+def lab5Warmup():
+  src = get_pic()
+  srcW, srcH = getWidth(src), getHeight(src)
+  destW, destH = getWidth(src) +100, getHeight(src) + 100
+  destPic = makeEmptyPicture(destW, destH)
+  destX = 0 + ((destW / 2) - (srcW / 2))
+  for srcX in range(0, srcW):
+    destY = 0 + ((destH / 2) - (srcH / 2))
+    for srcY in range(0, srcH):
+      color = getColor(getPixel(src, srcX, srcY))
+      setColor(getPixel(destPic, destX, destY), color)
+      destY = destY + 1
+    destX = destX + 1
+  show(src)
+  repaint(destPic)
+  writePictureTo(destPic, "F://CSUMB//CST205//JES//LAB5//Results//framed_picture.jpg")
+
+#Problem 1:
+
+def pyCopy(source, target, destX, destY):
+  for x in range(0, getWidth(source)):
+    for y in range(0, getHeight(source)):
+      color = getColor(getPixel(source, x, y))
+      setColor(getPixel(target, x + destX, x + destY), color)
+  show(target)
+
+#Problem 2:
+
+def makeNegative(source):
+  pixels = getPixels(source)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    oppColor = makeColor(255 - r, 255 - g, 255 - b)
+    setColor(p, oppColor)
+  return(source)
+  
+def halfRed(source):
+  pixels = getPixels(source)
+  for p in pixels:
+    r = getRed(p)
+    setRed(p, r*0.5)
+  return(source)
+  
+def noBlue(source):
+  pixels = getPixels(source)
+  for p in pixels:
+    r = getBlue(p)
+    setBlue(p, 0)
+  return(source)
+  
+def betterBAndW(source):
+  pixels = getPixels(source)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    newColor = makeColor((r * 0.299) + (g * 0.587) + (b * 0.114) / 3)
+    setColor(p, newColor)
+  return(source)
+  
+def vertMirror(source):
+  srcW. srcH = getWidth(source), getHeight(source)
+  canvas = makeEmptyPicture(srcW, srcH)
+  for x in range(0, srcW/2):
+    for y in range(0, srcH):
+      c = getColor(getPixel(source, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, srcW-x-1, y), c)
+  return(canvas)
+
+def horizMirror(source):
+  w = getWidth(source)
+  h = getHeight(source)
+  canvas = makeEmptyPicture(w, h)
+  for x in range(0, w):
+    for y in range(0, h/2):
+      c = getColor(getPixel(source, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, x, h-y-1), c)
+  return(canvas)
+        
+def rotatePic(source):                            
+  srcW, srcH = getWidth(source), getHeight(source)      
+  canvas = makeEmptyPicture(srcH, srcW)                        
+  for x in range(0, srcW):                    
+    for y in range(0, srcH):                  
+      color = getColor(getPixel(source, x, y)) 
+      target = getPixel(canvas, srcH-y-1, x)      
+      setColor(target, color)              
+  return(canvas)
+  
+def horizMirrorBottom(source):
+  srcW, srcH = getWidth(source), getHeight(source)
+  canvas = makeEmptyPicture(srcW, srcH)
+  for x in range(0, srcW):
+    for y in range(0, srcH/2):
+      c = getColor(getPixel(source, x, y))
+      setColor(getPixel(canvas, x, y), c)
+      setColor(getPixel(canvas, x, h-y-1), c)
+  return(canvas)
+  
+def simpleCopy(source):
+  srcW, srcH = getWidth(source), getHeight(source)
+  canvas = makeEmptyPicture(srcW, srcH)
+  for x in range(0, srcW):
+    for y in range(0, srcH):
+      c = getColor(getPixel(source, x, y))
+      setColor(getPixel(canvas, x, y), c)
+  return(canvas)
+
+def pyCopy(source, target, destX, destY):
+  for x in range(0, getWidth(source)):
+    for y in range(0, getHeight(source)):
+      color = getColor(getPixel(source, x, y))
+      setColor(getPixel(target, x + destX, y + destY), color)
+  show(target)
+
+def makeCollage():
+  collage = makeEmptyPicture(2550, 3300)
+  
+  #picture one
+  
+  pic1 = makePicture(pickAFile())
+  pyCopy(pic1, collage, 0, 0)
+  
+  #picture two
+  
+  pic2 = makePicture(pickAFile())
+  noBlue(pic2)
+  pyCopy(pic2, collage, 600, 0)
+  
+  #picture three
+  
+  pic3 = makePicture(pickAFile())
+  pyCopy(pic3, collage, 1600, 0)
+  
+  #picture four
+  
+  pic4 = makePicture(pickAFile())
+  halfRed(pic4)
+  pyCopy(pic4, collage, 0, 356)
+  
+  #picture five
+  
+  pic5 = makePicture(pickAFile())
+  pyCopy(pic5, collage, 625, 759)
+  
+  #picture six
+  
+  pic6 = makePicture(pickAFile())
+  horizMirror(pic6)
+  pyCopy(pic6, collage, 1649, 900)
+  
+  #picture seven
+  
+  pic7 = makePicture(pickAFile())
+  makeNegative(pic7)
+  pyCopy(pic7, collage, 0, 856)
+  
+  #picture eight
+  
+  pic8 = makePicture(pickAFile())
+  pyCopy(pic8, collage, 650, 1380)
+  
+  #picture nine
+  
+  pic9 = makePicture(pickAFile())
+  pyCopy(pic9, collage, 0, 1856)
+  
+  #picture ten
+  
+  pic10 = makePicture(pickAFile())
+  betterBAndW(pic10)
+  pyCopy(pic10, collage, 0, 2550)
+  
+  #picture eleven
+  
+  pic11 = makePicture(pickAFile())
+  pyCopy(pic11, collage, 1725, 1800)
+  
+  repaint(collage)
+  show(collage)
+  writePictureTo(collage, "F://CSUMB//CST205//JES//LAB5//Results//collage_result.jpg")
+  return collage
+  
+  def warmup():   ###LAB 6 WARMUP
+  src = makePicture(pickAFile())
+  for x in range(866, 989):
+    for y in range(285, 466):
+      px = getPixel(src, x, y)
+      color = getColor(px)
+      if distance(color, red) < 200:
+        setColor(px, black)
+      if distance(color, yellow) < 200:
+        setColor(px, black)
+  repaint(src)
+  show(src)
+  #writePictureTo(src, "C://Users//Ryan//Desktop//lab6//warmup.jpg")
+  
+def bAndW(pic):
+  for p in getPixels(pic):
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    newColor = makeColor((r + g + b) / 3)
+    setColor(p, newColor)
+  return(pic)
+  
+
+  
+  
+def pyCopy(source, target, destX, destY):
+  for x in range(0, getWidth(source)):
+    for y in range(0, getHeight(source)):
+      color = getColor(getPixel(source, x, y))
+      setColor(getPixel(target, x + destX, y + destY), color)
+  show(target)
+
+def betterBnW(pic):
+ pixels = getPixels(pic)
+ for p in pixels:
+  r = getRed(p)
+  g = getGreen(p)
+  b = getBlue(p)
+  BnW1 = (r*0.299 + g*0.587 + b*0.114)
+  setRed(p, BnW1)
+  setGreen(p, BnW1)
+  setBlue(p, BnW1)
+ return pic
+ 
+ 
+def makeSepia():
+  pic = makePicture(pickAFile())
+  destPic = makeEmptyPicture(getWidth(pic), getHeight(pic))
+  destPic = betterBnW(pic)
+  for x in range (0, getWidth(destPic)):
+    for y in range (0, getHeight(destPic)):
+      p = getPixel(destPic, x, y)
+      r = getRed(p)
+      b = getBlue(p)
+      if(r < 63):
+        oldgrn = getGreen(p)
+        col = makeColor(r * 1.1, oldgrn, b * .9)
+        setColor(p, col)
+     
+      elif(r > 63 and r < 163):
+        oldgrn = getGreen(p)
+        col = makeColor(r * 1.15, oldgrn, b * 0.85)
+        setColor(p, col)
+
+      
+      elif(r > 191 and r < 255):
+        oldgrn = getGreen(p)
+        col = makeColor(r * 1.08, oldgrn, b * .93)
+        setColor(p, col)
+
+      else:
+        oldgrn = getGreen(p)
+        col = makeColor(r * 1.08, oldgrn, b * .93)
+        setColor(p, col)
+
+  repaint(destPic)
+  show(destPic)
+ # writePictureTo(destPic, "C://Users//Ryan//Desktop//lab6//final.jpg")
+  
+  
+def artify(pic):     ###LAB 6 PROBLEM 2
+  for p in getPixels(pic):
+    r = getRed(p)
+    b = getBlue(p)
+    g = getGreen(p)
+    
+    if (r<64):
+      setRed(p, 31)
+    elif(r>63 and r<128):
+      setRed(p, 95)
+    elif(r>127 and r<192):
+      setRed(p, 159)
+    else:
+      setRed(p, 200)
+      
+    if (b < 64):
+      setBlue(p, 31)
+    elif(b > 603 and b < 128):
+      setBlue(p, 95)
+    elif(b > 127 and b < 192):
+      setBlue(p, 159)
+    else:
+      setBlue(p, 200)
+      
+    if (g < 64):
+      setGreen(p, 31)
+    elif(g > 63 and g < 128):
+      setGreen(p, 95)
+    elif(g > 127 and g < 192):
+      setGreen(p, 159)
+    else:
+      setGreen(p, 200)
+  #writePictureTo(pic, "C://Users//Ryan//Desktop//lab6//artify.jpg")   
+  show(pic)
+  return(pic)
+  
+  
+def get_pic():     ###LAB 6 PROBLEM 3
+  return makePicture(pickAFile())
+
+
+def pyCopyB(source, target, targetX, targetY): # source and target are pictures. Target is empty canvas
+  for x in range (0, getWidth(source)):
+    for y in range (0, getHeight(source)):
+      sourcepix = getPixel(source, x, y)
+      sourcecol = getColor(sourcepix)
+      setColor(getPixel(target, x + targetX, y + targetY), sourcecol)
+
+  
+  
+def chromakey():
+  gImage = get_pic() #image with green to be replaced
+  target = get_pic() #image to replace green in 1st img with
+  final = makeEmptyPicture(getWidth(gImage), getHeight(gImage))
+  pyCopyB(gImage, final, 0, 0)
+  for x in range (0, getWidth(final)):
+    for y in range (0, getHeight(final)):
+      sourcepix = getPixel(final, x, y) #image with the green to be replaced
+      sourcecol = getColor(sourcepix)    #hopefully green
+      targetpix = getPixel(target, x, y)  #pixel from image to be transposed on top of green
+      targetcol = getColor(targetpix)     #color taken from targetpix
+      if distance(sourcecol, green) < 150:
+        setColor(getPixel(final, x, y), targetcol)
+ # writePictureTo(final, "C://Users//Ryan//Desktop//lab6//final.jpg")
+ 
+#Line Drawing
+
+def betterBAndW(source):
+  pixels = getPixels(source)
+  for p in pixels:
+    r = getRed(p)
+    g = getGreen(p)
+    b = getBlue(p)
+    newColor = makeColor((r * 0.299) + (g * 0.587) + (b * 0.114) / 3)
+    setColor(p, newColor)
+  return(source)
+
+def lineDraw(source, contrast):
+  #target = makeEmptyPicture(getWidth(source), getHeight(source))
+  newPic = betterBAndW(source)
+  for x in range(0, getWidth(source) - 1):
+    for y in range(0, getHeight(source) - 1):
+      zero = getPixel(newPic, x, y)
+      down = getPixel(newPic, x, y + 1)
+      right = getPixel(newPic, x + 1, y)
+      avgZero = (getRed(zero) + getGreen(zero) + getBlue(zero)) / 3
+      avgDown = (getRed(down) + getGreen(down) + getBlue(down)) / 3
+      avgRight = (getRed(right) + getGreen(right) + getBlue(right)) / 3
+      if abs(avgZero - avgDown) > contrast and abs(avgZero - avgRight) > contrast:
+        setColor(zero, black)
+      if abs(avgZero - avgDown) <= contrast and abs(avgZero - avgRight) <= contrast:
+        setColor(zero, white)
+  repaint(newPic)
+  writePictureTo(newPic, "F://CSUMB//CST205//JES//LAB7//Results//line_drawing.jpg")
+  show(newPic)
